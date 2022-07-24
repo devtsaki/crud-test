@@ -15,6 +15,7 @@ describe("Home screen", () => {
           data: [],
           status: "",
           create: { status: "" },
+          edit: { status: "" },
           delete: { status: "" },
         }}
       />

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ITodo } from "features/home/types";
 import Dialog from "common/components/Dialog";
 import Actions from "./Actions";
+import EditModal from "../EditModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,6 +22,8 @@ interface Props {
 
 const TodoslList = ({ todos, ondeleteTodo }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isEditOpen, setIsEditOpen] = React.useState(false);
+  const [selectedTodo, setSelectedTodo] = React.useState({});
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -30,8 +33,17 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
     setIsOpen(false);
   };
 
-  const handleEditTodo = (id: number) => {
-    console.log("toto", id);
+  const handleOpenEditModal = () => {
+    setIsEditOpen(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditOpen(false);
+  };
+
+  const handleEditTodo = (todo: ITodo) => {
+    setSelectedTodo(todo);
+    handleOpenEditModal();
   };
 
   const handleDeleteTodo = (id: number) => {
@@ -66,7 +78,7 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
               </label>
             </div>
             <Actions
-              onEdit={() => handleEditTodo(todo.id)}
+              onEdit={() => handleEditTodo(todo)}
               onDelete={handleOpenModal}
             />
             <Dialog
@@ -75,6 +87,11 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
               isOpen={isOpen}
               onConfirm={() => handleDeleteTodo(todo.id)}
               onDismiss={handleCloseModal}
+            />
+            <EditModal
+              todo={selectedTodo as ITodo}
+              isOpen={isEditOpen}
+              onDismiss={handleCloseEditModal}
             />
           </li>
         ))}

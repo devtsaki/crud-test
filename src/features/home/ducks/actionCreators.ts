@@ -46,6 +46,30 @@ function createTodoFailed() {
   } as const;
 }
 
+function editTodo({ id, title }: { id: number; title: string }) {
+  return {
+    type: ActionNames.EDIT_TODO_REQUESTED,
+    payload: {
+      id,
+      title,
+    },
+  } as const;
+}
+
+function editTodoSucceeded() {
+  return {
+    type: ActionNames.EDIT_TODO_SUCCEDED,
+    payload: {},
+  } as const;
+}
+
+function editTodoFailed() {
+  return {
+    type: ActionNames.EDIT_TODO_FAILED,
+    payload: {},
+  } as const;
+}
+
 function deleteTodo({ id }: { id: number }) {
   return {
     type: ActionNames.DELETE_TODO_REQUESTED,
@@ -86,6 +110,10 @@ export default {
   createTodo,
   createTodoSucceeded,
   createTodoFailed,
+
+  editTodo,
+  editTodoSucceeded,
+  editTodoFailed,
 
   deleteTodo,
   deleteTodoSucceeded,

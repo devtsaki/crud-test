@@ -9,6 +9,10 @@ const ActionNames = {
   CREATE_TODO_SUCCEDED: `${PREFIX}/create/succeded`,
   CREATE_TODO_FAILED: `${PREFIX}/create/failed`,
 
+  EDIT_TODO_REQUESTED: `${PREFIX}/edit/requested`,
+  EDIT_TODO_SUCCEDED: `${PREFIX}/edit/succeded`,
+  EDIT_TODO_FAILED: `${PREFIX}/edit/failed`,
+
   DELETE_TODO_REQUESTED: `${PREFIX}/delete/requested`,
   DELETE_TODO_SUCCEDED: `${PREFIX}/delete/succeded`,
   DELETE_TODO_FAILED: `${PREFIX}/delete/failed`,

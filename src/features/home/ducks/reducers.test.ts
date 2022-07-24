@@ -7,6 +7,7 @@ describe("Common reducer", () => {
       data: [],
       status: "",
       create: { status: "" },
+      edit: { status: "" },
       delete: { status: "" },
     },
   };
@@ -17,6 +18,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -32,6 +34,7 @@ describe("Common reducer", () => {
         data: [],
         status: "PENDING",
         create: { status: "" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -48,6 +51,7 @@ describe("Common reducer", () => {
         data: [{ id: "123" }],
         status: "SUCCESS",
         create: { status: "" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -63,6 +67,7 @@ describe("Common reducer", () => {
         data: [],
         status: "FAILURE",
         create: { status: "" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -78,6 +83,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "PENDING" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -94,6 +100,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "SUCCESS" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
@@ -110,6 +117,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "FAILURE" },
+        edit: { status: "" },
         delete: { status: "" },
       },
     });
