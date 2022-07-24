@@ -42,7 +42,7 @@ export const Home = ({ data, deleteTodo, todosRequested }: IHomeScreen) => {
         text="List of todos ✅ ✅ ✅ ✅ ✅"
         onAddClick={handleOpenModal}
       />
-      <TodosList todos={todos} ondeleteTodo={deleteTodo} />
+      <TodosList todos={todos} onDeleteTodo={deleteTodo} />
       <AddNewModal isOpen={isOpen} onDismiss={handleDismiss} />
     </Wrapper>
   );

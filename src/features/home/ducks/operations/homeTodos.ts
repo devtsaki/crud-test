@@ -42,9 +42,14 @@ function* handleEditTodo(action: any): any {
   const { payload } = action;
 
   try {
-    const { id, title } = payload;
+    const { id, title, completed } = payload;
 
-    yield call(Services.Api.Data.put, `/todos/${id}`, { id, title }, {});
+    yield call(
+      Services.Api.Data.put,
+      `/todos/${id}`,
+      { id, title, completed },
+      {}
+    );
 
     yield put(ActionCreators.editTodoSucceeded());
     yield put(ActionCreators.getTodos());

@@ -1,1 +1,1 @@
-export { default } from "./TodosList";
+export { default, mapDispatchToProps, mapStateToProps } from "./TodosList";

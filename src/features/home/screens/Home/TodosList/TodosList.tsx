@@ -1,6 +1,10 @@
-import React from "react";
+import React, { Dispatch } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
+import { HomeTodosActionCreators } from "features/home/ducks";
+import { RootState } from "state/types";
+import { ITodoList } from "features/home/types";
 import { ITodo } from "features/home/types";
 import Dialog from "common/components/Dialog";
 import Actions from "./Actions";
@@ -15,12 +19,12 @@ const Wrapper = styled.div`
   align-content: flex-start;
 `;
 
-interface Props {
+interface Props extends ITodoList {
   todos: ITodo[];
-  ondeleteTodo: (payload: { id: number }) => void;
+  onDeleteTodo: (payload: { id: number }) => void;
 }
 
-const TodoslList = ({ todos, ondeleteTodo }: Props) => {
+export const TodosList = ({ todos, onDeleteTodo, editTodo }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isEditOpen, setIsEditOpen] = React.useState(false);
   const [selectedTodo, setSelectedTodo] = React.useState({});
@@ -47,8 +51,12 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
   };
 
   const handleDeleteTodo = (id: number) => {
-    ondeleteTodo({ id });
+    onDeleteTodo({ id });
     setIsOpen(false);
+  };
+
+  const handleCheckBox = (e: any, todo: ITodo) => {
+    editTodo({ ...todo, completed: e.target.checked });
   };
 
   if (todos.length === 0) {
@@ -67,8 +75,10 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
               <input
                 className="form-check-input  h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 type="checkbox"
-                value=""
+                value={`${todo.id}`}
                 id={`item_${todo.id}`}
+                checked={todo.completed}
+                onChange={(e) => handleCheckBox(e, todo)}
               />
               <label
                 className="form-check-label inline-block text-gray-800"
@@ -100,4 +110,19 @@ const TodoslList = ({ todos, ondeleteTodo }: Props) => {
   );
 };
 
-export default TodoslList;
+export const mapStateToProps = (state: RootState) => {
+  return {
+    data: state.data.home.todos,
+  };
+};
+
+export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    editTodo: (payload: { id: number; title: string; completed: boolean }) =>
+      dispatch(HomeTodosActionCreators.editTodo(payload)),
+    resetApiData: (slice = "all") =>
+      dispatch(HomeTodosActionCreators.resetApiData(slice)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosList);

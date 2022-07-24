@@ -4,6 +4,11 @@ import {
 } from "./screens/Home";
 
 import {
+  mapDispatchToProps as TodoListMapDispatchToProps,
+  mapStateToProps as TodoListMapStateToProps,
+} from "./screens/Home/TodosList";
+
+import {
   mapDispatchToProps as BodyDispatchToProps,
   mapStateToProps as BodyMapStateToProps,
 } from "./screens/Home/AddNewModal/Body";
@@ -22,6 +27,8 @@ export type IBodyAddModal = {} & ReturnType<typeof BodyDispatchToProps> &
 export type IBodyEditModal = {} & ReturnType<typeof EditBodyDispatchToProps> &
   ReturnType<typeof EditBodyMapStateToProps>;
 
+export type ITodoList = {} & ReturnType<typeof TodoListMapDispatchToProps> &
+  ReturnType<typeof TodoListMapStateToProps>;
 export interface ITodo {
   id: number;
   title: string;

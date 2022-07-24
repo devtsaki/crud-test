@@ -29,10 +29,10 @@ const Body = ({ todo, data, resetApiData, editTodo, onDismiss }: Props) => {
   } = data;
 
   const handleSubmit = React.useCallback(
-    (values: { id: number; title: string }) => {
+    (values: { id: number; title: string; completed?: boolean }) => {
       setIsLoading(true);
-      const { id, title } = values;
-      editTodo({ id, title });
+      const { id, title, completed = false } = values;
+      editTodo({ id, title, completed });
     },
     [editTodo]
   );
@@ -134,7 +134,7 @@ export const mapStateToProps = (state: RootState) => {
 
 export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    editTodo: (payload: { id: number; title: string }) =>
+    editTodo: (payload: { id: number; title: string; completed: boolean }) =>
       dispatch(HomeTodosActionCreators.editTodo(payload)),
     resetApiData: (slice = "all") =>
       dispatch(HomeTodosActionCreators.resetApiData(slice)),

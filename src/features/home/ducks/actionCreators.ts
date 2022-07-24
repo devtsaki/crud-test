@@ -46,12 +46,21 @@ function createTodoFailed() {
   } as const;
 }
 
-function editTodo({ id, title }: { id: number; title: string }) {
+function editTodo({
+  id,
+  title,
+  completed,
+}: {
+  id: number;
+  title: string;
+  completed: boolean;
+}) {
   return {
     type: ActionNames.EDIT_TODO_REQUESTED,
     payload: {
       id,
       title,
+      completed,
     },
   } as const;
 }

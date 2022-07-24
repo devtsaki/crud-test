@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 
-import TodosList from "./TodosList";
+import { TodosList } from "./TodosList";
 
 describe("TodosList component", () => {
   const mockedTodos = [
@@ -15,10 +15,20 @@ describe("TodosList component", () => {
       completed: false,
     },
   ];
-  const ondeleteTodo = jest.fn();
+  const onDeleteTodo = jest.fn();
+  const onEditTodo = jest.fn();
+  const resetApiData = jest.fn();
 
   it("will render 'title1'", () => {
-    render(<TodosList todos={mockedTodos} ondeleteTodo={ondeleteTodo} />);
+    render(
+      <TodosList
+        data={{} as any}
+        todos={mockedTodos}
+        onDeleteTodo={onDeleteTodo}
+        editTodo={onEditTodo}
+        resetApiData={resetApiData}
+      />
+    );
 
     const element = screen.getByText("title1");
 
@@ -26,7 +36,15 @@ describe("TodosList component", () => {
   });
 
   it("will render 'title2'", () => {
-    render(<TodosList todos={mockedTodos} ondeleteTodo={ondeleteTodo} />);
+    render(
+      <TodosList
+        data={{} as any}
+        todos={mockedTodos}
+        onDeleteTodo={onDeleteTodo}
+        editTodo={onEditTodo}
+        resetApiData={resetApiData}
+      />
+    );
 
     const element = screen.getByText("title2");
 
