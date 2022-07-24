@@ -10,7 +10,7 @@ describe("Home screen", () => {
       <Home todosRequested={todosRequested} data={{ data: [], status: "" }} />
     );
 
-    const element = screen.getByText("I am Home");
+    const element = screen.getByText("List of todos ✅ ✅ ✅ ✅ ✅");
 
     expect(element).toBeTruthy();
   });

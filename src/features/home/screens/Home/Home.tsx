@@ -1,22 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "react";
+import styled from "styled-components";
 
 import { RootState } from "state/types";
 import { HomeTodosActionCreators } from "features/home/ducks";
 import { IHomeScreen } from "features/home/types";
+import PageTitle from "common/components/PageTitle";
+import TodosList from "./TodosList";
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const Home = ({ data, todosRequested }: IHomeScreen) => {
   React.useEffect(() => {
     todosRequested();
   }, [todosRequested]);
 
-  console.log(data);
+  const { data: todos = [] } = data;
 
   return (
-    <div>
+    <Wrapper>
+      <PageTitle text="List of todos ✅ ✅ ✅ ✅ ✅" />
       <span>I am Home</span>
-    </div>
+      <TodosList todos={todos} />
+    </Wrapper>
   );
 };
 
