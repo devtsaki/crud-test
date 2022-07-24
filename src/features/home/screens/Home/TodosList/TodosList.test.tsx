@@ -1,8 +1,29 @@
 import { screen, render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureMockStore from "redux-mock-store";
 
 import { TodosList } from "./TodosList";
 
 describe("TodosList component", () => {
+  const mockStore = configureMockStore();
+  const store = mockStore({
+    data: { home: { todos: { data: [], edit: { status: "" } } } },
+  });
+
+  const mockedData = {
+    data: [],
+    status: "",
+    create: {
+      status: "",
+    },
+    edit: {
+      status: "",
+    },
+    delete: {
+      status: "",
+    },
+  };
+
   const mockedTodos = [
     {
       id: 123,
@@ -21,13 +42,15 @@ describe("TodosList component", () => {
 
   it("will render 'title1'", () => {
     render(
-      <TodosList
-        data={{} as any}
-        todos={mockedTodos}
-        onDeleteTodo={onDeleteTodo}
-        editTodo={onEditTodo}
-        resetApiData={resetApiData}
-      />
+      <Provider store={store}>
+        <TodosList
+          data={mockedData}
+          todos={mockedTodos}
+          onDeleteTodo={onDeleteTodo}
+          editTodo={onEditTodo}
+          resetApiData={resetApiData}
+        />
+      </Provider>
     );
 
     const element = screen.getByText("title1");
@@ -37,13 +60,15 @@ describe("TodosList component", () => {
 
   it("will render 'title2'", () => {
     render(
-      <TodosList
-        data={{} as any}
-        todos={mockedTodos}
-        onDeleteTodo={onDeleteTodo}
-        editTodo={onEditTodo}
-        resetApiData={resetApiData}
-      />
+      <Provider store={store}>
+        <TodosList
+          data={mockedData}
+          todos={mockedTodos}
+          onDeleteTodo={onDeleteTodo}
+          editTodo={onEditTodo}
+          resetApiData={resetApiData}
+        />
+      </Provider>
     );
 
     const element = screen.getByText("title2");

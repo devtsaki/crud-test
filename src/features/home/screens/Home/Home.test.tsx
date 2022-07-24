@@ -7,7 +7,7 @@ import { Home } from "./Home";
 describe("Home screen", () => {
   const mockStore = configureMockStore();
   const store = mockStore({
-    data: { home: { todos: { data: [] } } },
+    data: { home: { todos: { data: [], edit: { status: "" } } } },
   });
 
   it("will render 'I am Home'", () => {

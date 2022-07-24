@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { HomeTodosActionCreators } from "features/home/ducks";
 import { RootState } from "state/types";
+import Constants from "common/constants";
 import { ITodoList } from "features/home/types";
 import { ITodo } from "features/home/types";
 import Dialog from "common/components/Dialog";
@@ -25,10 +26,38 @@ interface Props extends ITodoList {
   onDeleteTodo: (payload: { id: number }) => void;
 }
 
-export const TodosList = ({ todos, onDeleteTodo, editTodo }: Props) => {
+export const TodosList = ({
+  todos,
+  data,
+  onDeleteTodo,
+  editTodo,
+  resetApiData,
+}: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isEditOpen, setIsEditOpen] = React.useState(false);
   const [selectedTodo, setSelectedTodo] = React.useState({});
+
+  const curatedData = React.useMemo(() => {
+    return todos.map((todo) => ({
+      ...todo,
+      completed: todo.completed ? true : false,
+    }));
+  }, [todos]);
+
+  const {
+    edit: { status = "" },
+  } = data;
+
+  React.useEffect(() => {
+    if (
+      [
+        Constants.RESPONSE_STATUS.SUCCESS,
+        Constants.RESPONSE_STATUS.FAILURE,
+      ].includes(status)
+    ) {
+      resetApiData();
+    }
+  }, [status, resetApiData]);
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -60,14 +89,14 @@ export const TodosList = ({ todos, onDeleteTodo, editTodo }: Props) => {
     editTodo({ ...todo, completed: e.target.checked });
   };
 
-  if (todos.length === 0) {
+  if (curatedData.length === 0) {
     return <span>There are no todos</span>;
   }
 
   return (
     <Wrapper>
       <ul className="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
-        {todos.map((todo) => (
+        {curatedData.map((todo) => (
           <li
             key={todo.id}
             className="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg flex items-center justify-between"
