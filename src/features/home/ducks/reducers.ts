@@ -8,6 +8,7 @@ const todosReducerInitialState = {
   data: [],
   status: "",
   create: { status: "" },
+  delete: { status: "" },
 };
 function TodosDataReducer(state = todosReducerInitialState, action: any) {
   switch (action.type) {
@@ -45,6 +46,24 @@ function TodosDataReducer(state = todosReducerInitialState, action: any) {
     case ActionNames.CREATE_TODO_FAILED: {
       return update(state, {
         create: { status: { $set: CONSTANTS.RESPONSE_STATUS.FAILURE } },
+      });
+    }
+
+    case ActionNames.DELETE_TODO_REQUESTED: {
+      return update(state, {
+        delete: { status: { $set: CONSTANTS.RESPONSE_STATUS.PENDING } },
+      });
+    }
+
+    case ActionNames.DELETE_TODO_SUCCEDED: {
+      return update(state, {
+        delete: { status: { $set: CONSTANTS.RESPONSE_STATUS.SUCCESS } },
+      });
+    }
+
+    case ActionNames.DELETE_TODO_FAILED: {
+      return update(state, {
+        delete: { status: { $set: CONSTANTS.RESPONSE_STATUS.FAILURE } },
       });
     }
 

@@ -7,6 +7,7 @@ import ActionNames from "features/home/ducks/actionNames";
 function* homeTodosWatcher() {
   yield takeLatest(ActionNames.FETCH_TODOS_REQUESTED, handleHomeTodos);
   yield takeLatest(ActionNames.CREATE_TODO_REQUESTED, handleCreateTodo);
+  yield takeLatest(ActionNames.DELETE_TODO_REQUESTED, handleDeleteTodo);
 }
 
 function* handleHomeTodos(): any {
@@ -33,6 +34,21 @@ function* handleCreateTodo(action: any): any {
     yield put(ActionCreators.getTodos());
   } catch (error: any) {
     yield put(ActionCreators.createTodoFailed());
+  }
+}
+
+function* handleDeleteTodo(action: any): any {
+  const { payload } = action;
+
+  try {
+    const { id } = payload;
+
+    yield call(Services.Api.Data.delete, `/todos/${id}`);
+
+    yield put(ActionCreators.deleteTodoSucceeded());
+    yield put(ActionCreators.getTodos());
+  } catch (error: any) {
+    yield put(ActionCreators.deleteTodoFailed());
   }
 }
 

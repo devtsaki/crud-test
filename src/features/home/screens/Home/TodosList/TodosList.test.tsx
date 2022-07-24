@@ -15,9 +15,10 @@ describe("TodosList component", () => {
       completed: false,
     },
   ];
+  const ondeleteTodo = jest.fn();
 
   it("will render 'title1'", () => {
-    render(<TodosList todos={mockedTodos} />);
+    render(<TodosList todos={mockedTodos} ondeleteTodo={ondeleteTodo} />);
 
     const element = screen.getByText("title1");
 
@@ -25,7 +26,7 @@ describe("TodosList component", () => {
   });
 
   it("will render 'title2'", () => {
-    render(<TodosList todos={mockedTodos} />);
+    render(<TodosList todos={mockedTodos} ondeleteTodo={ondeleteTodo} />);
 
     const element = screen.getByText("title2");
 

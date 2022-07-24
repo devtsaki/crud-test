@@ -16,9 +16,10 @@ const Wrapper = styled.div`
 
 interface Props {
   todos: ITodo[];
+  ondeleteTodo: (payload: { id: number }) => void;
 }
 
-const TodoslList = ({ todos }: Props) => {
+const TodoslList = ({ todos, ondeleteTodo }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleOpenModal = () => {
@@ -34,7 +35,7 @@ const TodoslList = ({ todos }: Props) => {
   };
 
   const handleDeleteTodo = (id: number) => {
-    console.log("toto", id);
+    ondeleteTodo({ id });
     setIsOpen(false);
   };
 

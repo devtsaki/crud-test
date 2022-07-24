@@ -98,9 +98,7 @@ const Body = ({ data, resetApiData, createTodo, onDismiss }: Props) => {
                     variant="primary"
                     label="+ Add Todo"
                     disabled={
-                      !formik.dirty ||
-                      !!formik.errors?.title ||
-                      formik.isSubmitting
+                      !formik.dirty || !!formik.errors?.title || isLoading
                     }
                     onClick={formik.handleSubmit}
                   />

@@ -46,6 +46,29 @@ function createTodoFailed() {
   } as const;
 }
 
+function deleteTodo({ id }: { id: number }) {
+  return {
+    type: ActionNames.DELETE_TODO_REQUESTED,
+    payload: {
+      id,
+    },
+  } as const;
+}
+
+function deleteTodoSucceeded() {
+  return {
+    type: ActionNames.DELETE_TODO_SUCCEDED,
+    payload: {},
+  } as const;
+}
+
+function deleteTodoFailed() {
+  return {
+    type: ActionNames.DELETE_TODO_FAILED,
+    payload: {},
+  } as const;
+}
+
 function resetApiData(slice = "all") {
   return {
     type: ActionNames.RESET_DATA,
@@ -63,6 +86,10 @@ export default {
   createTodo,
   createTodoSucceeded,
   createTodoFailed,
+
+  deleteTodo,
+  deleteTodoSucceeded,
+  deleteTodoFailed,
 
   resetApiData,
 };

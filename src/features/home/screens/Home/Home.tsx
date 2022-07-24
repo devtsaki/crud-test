@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const Home = ({ data, todosRequested }: IHomeScreen) => {
+export const Home = ({ data, deleteTodo, todosRequested }: IHomeScreen) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -42,7 +42,7 @@ export const Home = ({ data, todosRequested }: IHomeScreen) => {
         text="List of todos ✅ ✅ ✅ ✅ ✅"
         onAddClick={handleOpenModal}
       />
-      <TodosList todos={todos} />
+      <TodosList todos={todos} ondeleteTodo={deleteTodo} />
       <AddNewModal isOpen={isOpen} onDismiss={handleDismiss} />
     </Wrapper>
   );
@@ -57,6 +57,8 @@ export const mapStateToProps = (state: RootState) => {
 export const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
     todosRequested: () => dispatch(HomeTodosActionCreators.getTodos()),
+    deleteTodo: (payload: { id: number }) =>
+      dispatch(HomeTodosActionCreators.deleteTodo(payload)),
   };
 };
 

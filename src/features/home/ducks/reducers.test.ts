@@ -3,12 +3,22 @@ import ActionNames from "./actionNames";
 
 describe("Common reducer", () => {
   const initialState = {
-    todos: { data: [], status: "", create: { status: "" } },
+    todos: {
+      data: [],
+      status: "",
+      create: { status: "" },
+      delete: { status: "" },
+    },
   };
 
   it("will return the initial state", () => {
     expect(CommonReducers(initialState, { type: "a type" } as any)).toEqual({
-      todos: { data: [], status: "", create: { status: "" } },
+      todos: {
+        data: [],
+        status: "",
+        create: { status: "" },
+        delete: { status: "" },
+      },
     });
   });
 
@@ -22,6 +32,7 @@ describe("Common reducer", () => {
         data: [],
         status: "PENDING",
         create: { status: "" },
+        delete: { status: "" },
       },
     });
   });
@@ -37,6 +48,7 @@ describe("Common reducer", () => {
         data: [{ id: "123" }],
         status: "SUCCESS",
         create: { status: "" },
+        delete: { status: "" },
       },
     });
   });
@@ -51,6 +63,7 @@ describe("Common reducer", () => {
         data: [],
         status: "FAILURE",
         create: { status: "" },
+        delete: { status: "" },
       },
     });
   });
@@ -65,6 +78,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "PENDING" },
+        delete: { status: "" },
       },
     });
   });
@@ -80,6 +94,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "SUCCESS" },
+        delete: { status: "" },
       },
     });
   });
@@ -95,6 +110,7 @@ describe("Common reducer", () => {
         data: [],
         status: "",
         create: { status: "FAILURE" },
+        delete: { status: "" },
       },
     });
   });
