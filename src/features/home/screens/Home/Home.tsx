@@ -28,7 +28,6 @@ export const Home = ({ data, todosRequested }: IHomeScreen) => {
   return (
     <Wrapper>
       <PageTitle text="List of todos ✅ ✅ ✅ ✅ ✅" />
-      <span>I am Home</span>
       <TodosList todos={todos} />
     </Wrapper>
   );
