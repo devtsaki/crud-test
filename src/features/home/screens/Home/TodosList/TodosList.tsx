@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { ITodo } from "features/home/types";
+import Actions from "./Actions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,8 +17,12 @@ interface Props {
 }
 
 const TodoslList = ({ todos }: Props) => {
-  const handleSelectTodo = (todo: ITodo) => {
-    console.log("toto", todo);
+  const handleEditTodo = (id: number) => {
+    console.log("toto", id);
+  };
+
+  const handleDeleteTodo = (id: number) => {
+    console.log("toto", id);
   };
 
   if (todos.length === 0) {
@@ -30,7 +35,7 @@ const TodoslList = ({ todos }: Props) => {
         {todos.map((todo) => (
           <li
             key={todo.id}
-            className="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg"
+            className="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg flex items-center justify-between"
           >
             <div className="form-check">
               <input
@@ -46,6 +51,10 @@ const TodoslList = ({ todos }: Props) => {
                 {todo.title}
               </label>
             </div>
+            <Actions
+              onEdit={() => handleEditTodo(todo.id)}
+              onDelete={() => handleDeleteTodo(todo.id)}
+            />
           </li>
         ))}
       </ul>
