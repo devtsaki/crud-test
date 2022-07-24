@@ -1,6 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 
 import { ITodo } from "features/home/types";
+import Dialog from "common/components/Dialog";
 import Actions from "./Actions";
 
 const Wrapper = styled.div`
@@ -17,12 +19,23 @@ interface Props {
 }
 
 const TodoslList = ({ todos }: Props) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
   const handleEditTodo = (id: number) => {
     console.log("toto", id);
   };
 
   const handleDeleteTodo = (id: number) => {
     console.log("toto", id);
+    setIsOpen(false);
   };
 
   if (todos.length === 0) {
@@ -53,7 +66,14 @@ const TodoslList = ({ todos }: Props) => {
             </div>
             <Actions
               onEdit={() => handleEditTodo(todo.id)}
-              onDelete={() => handleDeleteTodo(todo.id)}
+              onDelete={handleOpenModal}
+            />
+            <Dialog
+              title="Delete favorite"
+              description="Are you sure you want to delete this favorite?"
+              isOpen={isOpen}
+              onConfirm={() => handleDeleteTodo(todo.id)}
+              onDismiss={handleCloseModal}
             />
           </li>
         ))}

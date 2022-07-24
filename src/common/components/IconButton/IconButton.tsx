@@ -1,14 +1,16 @@
 interface Props {
-  icon: "edit" | "delete";
+  icon: "edit" | "delete" | "close";
   disabled?: boolean;
   onClick: () => void;
 }
 
-const getIcon = (icon: "edit" | "delete") => {
+const getIcon = (icon: "edit" | "delete" | "close") => {
   if (icon === "delete") {
     return "🗑";
   } else if (icon === "edit") {
     return "✎";
+  } else if (icon === "close") {
+    return "✕";
   }
 };
 
