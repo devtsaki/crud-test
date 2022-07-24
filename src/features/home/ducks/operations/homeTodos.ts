@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { toast } from "react-toastify";
 
 import Services from "services";
 import ActionCreators from "features/home/ducks/actionCreators";
@@ -18,8 +19,12 @@ function* handleHomeTodos(): any {
     });
 
     yield put(ActionCreators.todosSucceeded(response.data));
-  } catch (error) {
+  } catch (error: any) {
     yield put(ActionCreators.todosFailed());
+    yield call(
+      toast.error,
+      error?.response?.data?.message ?? "Failed to fetch todos!"
+    );
   }
 }
 
@@ -33,8 +38,15 @@ function* handleCreateTodo(action: any): any {
 
     yield put(ActionCreators.createTodoSucceeded());
     yield put(ActionCreators.getTodos());
+
+    yield call(toast.success, "Todo created successfully!");
   } catch (error: any) {
     yield put(ActionCreators.createTodoFailed());
+
+    yield call(
+      toast.error,
+      error?.response?.data?.message ?? "Failed to create todo!"
+    );
   }
 }
 
@@ -53,6 +65,8 @@ function* handleEditTodo(action: any): any {
 
     yield put(ActionCreators.editTodoSucceeded());
     yield put(ActionCreators.getTodos());
+
+    yield call(toast.success, "Todo updated successfully!");
   } catch (error: any) {
     yield put(ActionCreators.editTodoFailed());
   }
@@ -68,8 +82,15 @@ function* handleDeleteTodo(action: any): any {
 
     yield put(ActionCreators.deleteTodoSucceeded());
     yield put(ActionCreators.getTodos());
+
+    yield call(toast.success, "Todo deleted successfully!");
   } catch (error: any) {
     yield put(ActionCreators.deleteTodoFailed());
+
+    yield call(
+      toast.error,
+      error?.response?.data?.message ?? "Failed to delete todo!"
+    );
   }
 }
 

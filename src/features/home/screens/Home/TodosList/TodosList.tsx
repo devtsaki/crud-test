@@ -12,7 +12,8 @@ import EditModal from "../EditModal";
 
 const Wrapper = styled.div`
   display: flex;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -77,7 +78,7 @@ export const TodosList = ({ todos, onDeleteTodo, editTodo }: Props) => {
                 type="checkbox"
                 value={`${todo.id}`}
                 id={`item_${todo.id}`}
-                checked={todo.completed}
+                checked={todo?.completed}
                 onChange={(e) => handleCheckBox(e, todo)}
               />
               <label
