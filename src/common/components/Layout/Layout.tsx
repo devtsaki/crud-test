@@ -2,17 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 import Main from "../Main";
+import Header from "../Header";
 
 const Wrapper = styled.div`
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  position: absolute;
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 interface Props {
@@ -22,6 +20,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <Wrapper>
+      <Header />
       <Main>{children}</Main>
     </Wrapper>
   );
