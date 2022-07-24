@@ -9,7 +9,7 @@ function* homeTodosWatcher() {
   yield takeLatest(ActionNames.CREATE_TODO_REQUESTED, handleCreateTodo);
 }
 
-function* handleHomeTodos({ action }: any): any {
+function* handleHomeTodos(): any {
   try {
     const response = yield call(Services.Api.Data.get, "/todos", {
       params: {},
@@ -21,7 +21,7 @@ function* handleHomeTodos({ action }: any): any {
   }
 }
 
-function* handleCreateTodo({ action }: any): any {
+function* handleCreateTodo(action: any): any {
   const { payload } = action;
 
   try {

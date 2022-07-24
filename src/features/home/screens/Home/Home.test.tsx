@@ -7,7 +7,10 @@ describe("Home screen", () => {
     const todosRequested = jest.fn();
 
     render(
-      <Home todosRequested={todosRequested} data={{ data: [], status: "" }} />
+      <Home
+        todosRequested={todosRequested}
+        data={{ data: [], status: "", create: { status: "" } }}
+      />
     );
 
     const element = screen.getByText("List of todos ✅ ✅ ✅ ✅ ✅");

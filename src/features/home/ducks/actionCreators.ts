@@ -46,6 +46,15 @@ function createTodoFailed() {
   } as const;
 }
 
+function resetApiData(slice = "all") {
+  return {
+    type: ActionNames.RESET_DATA,
+    payload: {
+      slice,
+    },
+  };
+}
+
 export default {
   getTodos,
   todosSucceeded,
@@ -54,4 +63,6 @@ export default {
   createTodo,
   createTodoSucceeded,
   createTodoFailed,
+
+  resetApiData,
 };

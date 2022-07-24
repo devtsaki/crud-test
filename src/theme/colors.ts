@@ -92,6 +92,7 @@ const colors = {
   sidebarBackground: palette.grey[600],
   linkBackground: palette.blue[800],
   linkBackgroundHover: palette.blue[600],
+  disabled: palette.grey[500],
 };
 
 export default colors;

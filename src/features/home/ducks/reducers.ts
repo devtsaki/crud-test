@@ -48,6 +48,15 @@ function TodosDataReducer(state = todosReducerInitialState, action: any) {
       });
     }
 
+    case ActionNames.RESET_DATA: {
+      const slice = action.payload.slice;
+      if (slice === "all") {
+        return todosReducerInitialState;
+      }
+
+      return state;
+    }
+
     default:
       return state;
   }
