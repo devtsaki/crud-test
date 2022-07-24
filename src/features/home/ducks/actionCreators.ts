@@ -23,8 +23,35 @@ function todosFailed() {
   } as const;
 }
 
+function createTodo({ title }: { title: string }) {
+  return {
+    type: ActionNames.CREATE_TODO_REQUESTED,
+    payload: {
+      title,
+    },
+  } as const;
+}
+
+function createTodoSucceeded() {
+  return {
+    type: ActionNames.CREATE_TODO_SUCCEDED,
+    payload: {},
+  } as const;
+}
+
+function createTodoFailed() {
+  return {
+    type: ActionNames.CREATE_TODO_FAILED,
+    payload: {},
+  } as const;
+}
+
 export default {
   getTodos,
   todosSucceeded,
   todosFailed,
+
+  createTodo,
+  createTodoSucceeded,
+  createTodoFailed,
 };

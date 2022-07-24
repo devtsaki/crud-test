@@ -3,12 +3,12 @@ import ActionNames from "./actionNames";
 
 describe("Common reducer", () => {
   const initialState = {
-    todos: { data: [], status: "" },
+    todos: { data: [], status: "", create: { status: "" } },
   };
 
   it("will return the initial state", () => {
     expect(CommonReducers(initialState, { type: "a type" } as any)).toEqual({
-      todos: { data: [], status: "" },
+      todos: { data: [], status: "", create: { status: "" } },
     });
   });
 
@@ -21,6 +21,7 @@ describe("Common reducer", () => {
       todos: {
         data: [],
         status: "PENDING",
+        create: { status: "" },
       },
     });
   });
@@ -29,12 +30,13 @@ describe("Common reducer", () => {
     expect(
       CommonReducers(initialState, {
         type: ActionNames.FETCH_TODOS_SUCCEDED,
-        payload: { data: [{ image: "123" }] },
+        payload: { data: [{ id: "123" }] },
       } as any)
     ).toEqual({
       todos: {
-        data: [{ image: "123" }],
+        data: [{ id: "123" }],
         status: "SUCCESS",
+        create: { status: "" },
       },
     });
   });
@@ -48,6 +50,51 @@ describe("Common reducer", () => {
       todos: {
         data: [],
         status: "FAILURE",
+        create: { status: "" },
+      },
+    });
+  });
+
+  it("will return the CREATE_TODO_REQUESTED state", () => {
+    expect(
+      CommonReducers(initialState, {
+        type: ActionNames.CREATE_TODO_REQUESTED,
+      } as any)
+    ).toEqual({
+      todos: {
+        data: [],
+        status: "",
+        create: { status: "PENDING" },
+      },
+    });
+  });
+
+  it("will return the CREATE_TODO_SUCCEDED state", () => {
+    expect(
+      CommonReducers(initialState, {
+        type: ActionNames.CREATE_TODO_SUCCEDED,
+        payload: {},
+      } as any)
+    ).toEqual({
+      todos: {
+        data: [],
+        status: "",
+        create: { status: "SUCCESS" },
+      },
+    });
+  });
+
+  it("will return the CREATE_TODO_FAILED state", () => {
+    expect(
+      CommonReducers(initialState, {
+        type: ActionNames.CREATE_TODO_FAILED,
+        payload: {},
+      } as any)
+    ).toEqual({
+      todos: {
+        data: [],
+        status: "",
+        create: { status: "FAILURE" },
       },
     });
   });
