@@ -8,6 +8,7 @@ import { HomeTodosActionCreators } from "features/home/ducks";
 import { IHomeScreen } from "features/home/types";
 import PageTitle from "common/components/PageTitle";
 import TodosList from "./TodosList";
+import AddNewModal from "./AddNewModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,16 +20,30 @@ const Wrapper = styled.div`
 `;
 
 export const Home = ({ data, todosRequested }: IHomeScreen) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   React.useEffect(() => {
     todosRequested();
   }, [todosRequested]);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleDismiss = () => {
+    setIsOpen(false);
+  };
 
   const { data: todos = [] } = data;
 
   return (
     <Wrapper>
-      <PageTitle text="List of todos ✅ ✅ ✅ ✅ ✅" />
+      <PageTitle
+        text="List of todos ✅ ✅ ✅ ✅ ✅"
+        onAddClick={handleOpenModal}
+      />
       <TodosList todos={todos} />
+      <AddNewModal isOpen={isOpen} onDismiss={handleDismiss} />
     </Wrapper>
   );
 };
