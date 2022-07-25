@@ -35,7 +35,7 @@ export const TodosList = ({
 }: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isEditOpen, setIsEditOpen] = React.useState(false);
-  const [selectedTodo, setSelectedTodo] = React.useState({});
+  const [selectedTodo, setSelectedTodo] = React.useState({} as ITodo);
 
   const curatedData = React.useMemo(() => {
     return todos.map((todo) => ({
@@ -59,7 +59,8 @@ export const TodosList = ({
     }
   }, [status, resetApiData]);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (todo: ITodo) => {
+    setSelectedTodo(todo);
     setIsOpen(true);
   };
 
@@ -80,8 +81,9 @@ export const TodosList = ({
     handleOpenEditModal();
   };
 
-  const handleDeleteTodo = (id: number) => {
-    onDeleteTodo({ id });
+  const handleDeleteTodo = () => {
+    console.log("hndle;e", selectedTodo?.id);
+    onDeleteTodo({ id: selectedTodo?.id });
     setIsOpen(false);
   };
 
@@ -119,13 +121,13 @@ export const TodosList = ({
             </div>
             <Actions
               onEdit={() => handleEditTodo(todo)}
-              onDelete={handleOpenModal}
+              onDelete={() => handleOpenModal(todo)}
             />
             <Dialog
-              title="Delete favorite"
-              description="Are you sure you want to delete this favorite?"
+              title="Delete todo"
+              description="Are you sure you want to delete this todo?"
               isOpen={isOpen}
-              onConfirm={() => handleDeleteTodo(todo.id)}
+              onConfirm={handleDeleteTodo}
               onDismiss={handleCloseModal}
             />
             <EditModal
