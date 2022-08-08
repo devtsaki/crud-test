@@ -78,9 +78,7 @@ function* handleDeleteTodo(action: any): any {
   try {
     const { id } = payload;
 
-    console.log("dele", id);
-
-    // yield call(Services.Api.Data.delete, `/todos/${id}`);
+    yield call(Services.Api.Data.delete, `/todos/${id}`);
 
     yield put(ActionCreators.deleteTodoSucceeded());
     yield put(ActionCreators.getTodos());

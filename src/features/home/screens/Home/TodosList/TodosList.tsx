@@ -82,7 +82,6 @@ export const TodosList = ({
   };
 
   const handleDeleteTodo = () => {
-    console.log("hndle;e", selectedTodo?.id);
     onDeleteTodo({ id: selectedTodo?.id });
     setIsOpen(false);
   };
